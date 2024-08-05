@@ -17,6 +17,7 @@ export class UsersService {
 
   async create(dto: CreateUserDto) {
     dto.username = dto.username.trim().toLowerCase();
+    dto.email = dto.email.trim().toLowerCase();
     if (+dto.phone.split('')[0] == 0) dto.phone = dto.phone.slice(1);
 
     const checkDuplicate = await this.userRepository.findOneByCondition({
@@ -26,7 +27,7 @@ export class UsersService {
     if (!dto.password) throw new Error(messageResponse.system.missingData);
     const password = String(dto.password).trim();
     dto.password = await this.helper.hashString(password);
-    return this.userRepository.create({ ...dto });
+    return this.userRepository.create({ ...dto, confirmAccount: true });
   }
 
   async findAll(pagination: PaginationDto, search: string, status: string, phone: string, sort?: any) {

@@ -16,7 +16,23 @@ export class UploadController {
       if (!files.length) {
         throw new HttpException('file not found', 500);
       }
-      const paths = await Promise.all(files.map((file) => this.firebaseService.uploadImageToStorage(file, folder || 'client')));
+      const paths = await Promise.all(files.map((file) => this.firebaseService.uploadImageToStorage(file, folder ? `image/${folder}` : 'image/client')));
+      return {
+        data: paths,
+      };
+    } catch (error) {
+      console.error('Error uploading', error);
+    }
+  }
+
+  @Public()
+  @Post('file')
+  async uploadFile(@UploadedFilesCustomer() files: any[], @Query('folder') folder: string) {
+    try {
+      if (!files.length) {
+        throw new HttpException('file not found', 500);
+      }
+      const paths = await Promise.all(files.map((file) => this.firebaseService.uploadImageToStorage(file, folder ? `file/${folder}` : 'file/client')));
       return {
         data: paths,
       };

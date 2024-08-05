@@ -12,6 +12,7 @@ import { JwtAuthGuard } from './modules/auth/guards';
 import { PermissionGuard } from './modules/auth/guards/permission.guard';
 import { UploadModule } from './modules/upload/upload.module';
 import { FirebaseModule } from 'nestjs-firebase';
+import { DocumentModule } from './modules/document/document.module';
 
 @Module({
   imports: [
@@ -54,6 +55,7 @@ import { FirebaseModule } from 'nestjs-firebase';
     UsersModule,
     AuthModule,
     UploadModule,
+    DocumentModule,
   ],
   controllers: [AppController],
   providers: [

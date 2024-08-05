@@ -19,12 +19,4 @@ export const messageResponse = {
     userHasBlocked: 'user_has_blocked',
     cannot_access_cms: 'cannot_access_cms',
   },
-  group: {
-    notFound: 'group_not_found',
-    missingData: 'missing_data',
-    duplicate: 'duplicate_group',
-  },
-  class: {
-    classHasReceive: 'class_has_receive',
-  },
 };
